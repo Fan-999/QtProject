@@ -18,11 +18,14 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 private:
+    QLabel statusCursorLabel;
+    QLabel statusLabel;
     QLabel * flabCurFile;
     QProgressBar * progressBar;
     QSpinBox * spinFontSize;
     QFontComboBox * comboFont;
 
+    QString filePath;   //记录文件
     void iniUI();
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -43,6 +46,53 @@ private slots:
 
     void on_MainWindow_toolButtonStyleChanged(const Qt::ToolButtonStyle &toolButtonStyle);
 
+    void on_actionfind_triggered();
+
+    void on_action_R_triggered();
+
+    void on_actionNew_triggered();
+
+    void on_actopen_triggered();
+
+    void on_actionSave_triggered();
+
+    void on_actionAsave_triggered();
+
+    void on_actioncopy_triggered();
+
+    void on_actv_triggered();
+
+    void on_textEdit_copyAvailable(bool b);
+
+    void on_textEdit_redoAvailable(bool b);
+
+    void on_textEdit_undoAvailable(bool b);
+
+    void on_actionRedo_triggered();
+
+    void on_actioncut_triggered();
+
+    void on_actionUndo_triggered();
+
+    void on_action_A_triggered();
+
+    void on_actspace_triggered();
+
+    void on_action_F_triggered();
+
+    void on_actionIconBackColor_triggered();
+
+    void on_actionIconColor_triggered();
+
+    void on_actionBackColor_triggered();
+
+    void on_action_W_triggered();
+
+    void on_action_State_triggered();
+
+    void on_action_T_triggered();
+
+    void updateStatusBar(); //更新状态栏信息
 private:
     Ui::MainWindow *ui;
 };

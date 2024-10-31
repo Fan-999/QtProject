@@ -11,19 +11,29 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>小🐽文本编辑器</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>50</y>
-      <width>301</width>
-      <height>66</height>
-     </rect>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
     </property>
-   </widget>
+    <property name="leftMargin">
+     <number>1</number>
+    </property>
+    <property name="topMargin">
+     <number>1</number>
+    </property>
+    <property name="rightMargin">
+     <number>1</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <item>
+     <widget class="QPlainTextEdit" name="textEdit"/>
+    </item>
+   </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
@@ -37,42 +47,68 @@
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>文件</string>
+     <string>文件(&amp;F)</string>
     </property>
-    <addaction name="actAbout"/>
     <addaction name="actopen"/>
-    <addaction name="action_2"/>
+    <addaction name="actionNew"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionAsave"/>
     <addaction name="separator"/>
     <addaction name="actclose"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
-     <string>编辑</string>
+     <string>编辑(&amp;E)</string>
     </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="actioncut"/>
+    <addaction name="actioncopy"/>
+    <addaction name="actv"/>
     <addaction name="actspace"/>
     <addaction name="separator"/>
-    <addaction name="actv"/>
-    <addaction name="actioncopy"/>
-    <addaction name="actcut"/>
+    <addaction name="actionfind"/>
+    <addaction name="action_R"/>
+    <addaction name="separator"/>
+    <addaction name="action_A"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
-     <string>格式</string>
+     <string>格式(&amp;O)</string>
     </property>
-    <addaction name="actunder"/>
-    <addaction name="actb"/>
-    <addaction name="action_5"/>
+    <addaction name="action_W"/>
+    <addaction name="action_L"/>
+    <addaction name="separator"/>
+    <addaction name="action_F"/>
+    <addaction name="actionIconColor"/>
+    <addaction name="actionIconBackColor"/>
+    <addaction name="actionBackColor"/>
+   </widget>
+   <widget class="QMenu" name="menu_V">
+    <property name="title">
+     <string>查看(&amp;V)</string>
+    </property>
+    <addaction name="action_T"/>
+    <addaction name="action_State"/>
+   </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>帮助(&amp;H)</string>
+    </property>
+    <addaction name="actAbout"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
    <addaction name="menu_3"/>
+   <addaction name="menu_V"/>
+   <addaction name="menu_4"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
    <property name="toolButtonStyle">
-    <enum>Qt::ToolButtonStyle::ToolButtonTextUnderIcon</enum>
+    <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -80,27 +116,34 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="action_2"/>
+   <addaction name="actionNew"/>
    <addaction name="actopen"/>
-   <addaction name="actAbout"/>
+   <addaction name="actionSave"/>
+   <addaction name="actionAsave"/>
    <addaction name="separator"/>
-   <addaction name="actspace"/>
-   <addaction name="actcut"/>
+   <addaction name="actionUndo"/>
+   <addaction name="actionRedo"/>
+   <addaction name="actioncut"/>
    <addaction name="actioncopy"/>
    <addaction name="actv"/>
    <addaction name="separator"/>
-   <addaction name="action_5"/>
-   <addaction name="actb"/>
-   <addaction name="actunder"/>
+   <addaction name="actionfind"/>
+   <addaction name="action_R"/>
    <addaction name="separator"/>
+   <addaction name="action_F"/>
+   <addaction name="action_W"/>
+   <addaction name="action_L"/>
+   <addaction name="separator"/>
+   <addaction name="action_T"/>
+   <addaction name="action_State"/>
   </widget>
-  <action name="action_2">
+  <action name="actionNew">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/new2.bmp</normaloff>:/images/images/new2.bmp</iconset>
+     <normaloff>:/images/newfile.png</normaloff>:/images/newfile.png</iconset>
    </property>
    <property name="text">
-    <string>新建</string>
+    <string>新建(N)</string>
    </property>
    <property name="toolTip">
     <string>新建文件</string>
@@ -111,14 +154,17 @@
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actopen">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/open3.bmp</normaloff>:/images/images/open3.bmp</iconset>
+     <normaloff>:/images/openfile.png</normaloff>:/images/openfile.png</iconset>
    </property>
    <property name="text">
-    <string>打开</string>
+    <string>打开(O)</string>
    </property>
    <property name="toolTip">
     <string>打开文件</string>
@@ -129,29 +175,32 @@
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
   </action>
   <action name="actclose">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/exit.bmp</normaloff>:/images/images/exit.bmp</iconset>
+     <normaloff>:/images/exit.png</normaloff>:/images/exit.png</iconset>
    </property>
    <property name="text">
-    <string>退出</string>
+    <string>退出(X)</string>
    </property>
    <property name="toolTip">
     <string>退出</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+F</string>
-   </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actspace">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/103.bmp</normaloff>:/images/images/103.bmp</iconset>
+     <normaloff>:/images/empty.png</normaloff>:/images/empty.png</iconset>
    </property>
    <property name="text">
     <string>清空</string>
@@ -163,13 +212,19 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
-  <action name="actcut">
+  <action name="actioncut">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/cut.bmp</normaloff>:/images/images/cut.bmp</iconset>
+     <normaloff>:/images/cut.png</normaloff>:/images/cut.png</iconset>
    </property>
    <property name="text">
-    <string>剪切</string>
+    <string>剪切(X)</string>
    </property>
    <property name="toolTip">
     <string>剪切选中</string>
@@ -182,12 +237,18 @@
    </property>
   </action>
   <action name="actioncopy">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/120.bmp</normaloff>:/images/images/120.bmp</iconset>
+     <normaloff>:/images/copy.png</normaloff>:/images/copy.png</iconset>
    </property>
    <property name="text">
-    <string>复制</string>
+    <string>复制(C)</string>
    </property>
    <property name="toolTip">
     <string>复制文本</string>
@@ -200,12 +261,18 @@
    </property>
   </action>
   <action name="actv">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/paste.bmp</normaloff>:/images/images/paste.bmp</iconset>
+     <normaloff>:/images/paste.png</normaloff>:/images/paste.png</iconset>
    </property>
    <property name="text">
-    <string>粘贴</string>
+    <string>粘贴(V)</string>
    </property>
    <property name="toolTip">
     <string>粘贴文本</string>
@@ -223,7 +290,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/ITL.BMP</normaloff>:/images/images/ITL.BMP</iconset>
+     <normaloff>:/images/ITL.BMP</normaloff>:/images/ITL.BMP</iconset>
    </property>
    <property name="text">
     <string>斜体</string>
@@ -238,7 +305,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/BLD.BMP</normaloff>:/images/images/BLD.BMP</iconset>
+     <normaloff>:/images/BLD.BMP</normaloff>:/images/BLD.BMP</iconset>
    </property>
    <property name="text">
     <string>粗体</string>
@@ -253,7 +320,7 @@
    </property>
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/UNDRLN.BMP</normaloff>:/images/images/UNDRLN.BMP</iconset>
+     <normaloff>:/images/UNDRLN.BMP</normaloff>:/images/UNDRLN.BMP</iconset>
    </property>
    <property name="text">
     <string>下划线</string>
@@ -265,13 +332,259 @@
   <action name="actAbout">
    <property name="icon">
     <iconset resource="res.qrc">
-     <normaloff>:/images/images/about.ico</normaloff>:/images/images/about.ico</iconset>
+     <normaloff>:/images/about.png</normaloff>:/images/about.png</iconset>
    </property>
    <property name="text">
-    <string>关于</string>
+    <string>关于(A)</string>
    </property>
    <property name="toolTip">
     <string>关于...</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>true</bool>
+   </property>
+   <property name="shortcutVisibleInContextMenu">
+    <bool>true</bool>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/savefile.png</normaloff>:/images/savefile.png</iconset>
+   </property>
+   <property name="text">
+    <string>保存(S)</string>
+   </property>
+   <property name="toolTip">
+    <string>保存文档</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionAsave">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/ansavefile.png</normaloff>:/images/ansavefile.png</iconset>
+   </property>
+   <property name="text">
+    <string>另存为</string>
+   </property>
+   <property name="toolTip">
+    <string>另存于...</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/revocate.png</normaloff>:/images/revocate.png</iconset>
+   </property>
+   <property name="text">
+    <string>撤销(Z)</string>
+   </property>
+   <property name="toolTip">
+    <string>撤销上一步</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/reback.png</normaloff>:/images/reback.png</iconset>
+   </property>
+   <property name="text">
+    <string>恢复(Shift+Z)</string>
+   </property>
+   <property name="toolTip">
+    <string>恢复上一步</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Z</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionfind">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/find.png</normaloff>:/images/find.png</iconset>
+   </property>
+   <property name="text">
+    <string>查找(Shift+F)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="action_R">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/replace.png</normaloff>:/images/replace.png</iconset>
+   </property>
+   <property name="text">
+    <string>替换(H)</string>
+   </property>
+   <property name="toolTip">
+    <string>替换...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="action_A">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/allselect.png</normaloff>:/images/allselect.png</iconset>
+   </property>
+   <property name="text">
+    <string>全选(A)</string>
+   </property>
+   <property name="toolTip">
+    <string>全选</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="action_W">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/autoenter.png</normaloff>:/images/autoenter.png</iconset>
+   </property>
+   <property name="text">
+    <string>自动换行(W)</string>
+   </property>
+   <property name="toolTip">
+    <string>自动换行</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="action_L">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/lookline.png</normaloff>:/images/lookline.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示行号(L)</string>
+   </property>
+   <property name="toolTip">
+    <string>显示行号</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+L</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="action_F">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/icon.png</normaloff>:/images/icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>字体(F)</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionIconBackColor">
+   <property name="text">
+    <string>字体背景色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionIconColor">
+   <property name="text">
+    <string>字体颜色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionBackColor">
+   <property name="text">
+    <string>编辑器背景色</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="action_T">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/tool.png</normaloff>:/images/tool.png</iconset>
+   </property>
+   <property name="text">
+    <string>工具栏(T)</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="action_State">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/state.png</normaloff>:/images/state.png</iconset>
+   </property>
+   <property name="text">
+    <string>状态栏(Shift+S)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
@@ -295,70 +608,6 @@
     <hint type="destinationlabel">
      <x>236</x>
      <y>142</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actcut</sender>
-   <signal>triggered()</signal>
-   <receiver>textEdit</receiver>
-   <slot>cut()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>201</x>
-     <y>143</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actioncopy</sender>
-   <signal>triggered()</signal>
-   <receiver>textEdit</receiver>
-   <slot>copy()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>201</x>
-     <y>143</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actv</sender>
-   <signal>triggered()</signal>
-   <receiver>textEdit</receiver>
-   <slot>paste()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>201</x>
-     <y>143</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>actspace</sender>
-   <signal>triggered()</signal>
-   <receiver>textEdit</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>201</x>
-     <y>143</y>
     </hint>
    </hints>
   </connection>

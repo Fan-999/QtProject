@@ -1,19 +1,31 @@
 <RCC>
-    <qresource prefix="/images">
-        <file>images/20.ico</file>
-        <file>images/103.bmp</file>
-        <file>images/120.bmp</file>
-        <file>images/430.bmp</file>
+    <qresource prefix="/">
+        <file>images/about.png</file>
+        <file>images/allselect.png</file>
+        <file>images/ansavefile.png</file>
+        <file>images/autoenter.png</file>
+        <file>images/backcolor.png</file>
         <file>images/BLD.BMP</file>
-        <file>images/cut.bmp</file>
-        <file>images/DBLUNDR.BMP</file>
-        <file>images/exit.bmp</file>
+        <file>images/copy.png</file>
+        <file>images/cut.png</file>
+        <file>images/exit.png</file>
+        <file>images/find.png</file>
+        <file>images/icon.png</file>
+        <file>images/iconbackcolor.png</file>
+        <file>images/iconcolor.png</file>
+        <file>images/lookline.png</file>
+        <file>images/newfile.png</file>
+        <file>images/openfile.png</file>
+        <file>images/paste.png</file>
+        <file>images/reback.png</file>
+        <file>images/replace.png</file>
+        <file>images/revocate.png</file>
+        <file>images/savefile.png</file>
+        <file>images/state.png</file>
+        <file>images/tool.png</file>
+        <file>images/empty.png</file>
         <file>images/ITL.BMP</file>
-        <file>images/new2.bmp</file>
-        <file>images/open3.bmp</file>
-        <file>images/paste.bmp</file>
         <file>images/UNDRLN.BMP</file>
-        <file>images/WORDUNDR.BMP</file>
-        <file>images/about.ico</file>
+        <file>images/notebook.png</file>
     </qresource>
 </RCC>
