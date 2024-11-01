@@ -49,11 +49,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     iniUI();
     //设置状态栏内容
-    statusLabel.setMaximumWidth(150);
+    statusLabel.setMaximumWidth(180);
     statusLabel.setText("length: "+QString::number(0)+"   lines: "+QString::number(1));
     ui->statusbar->addPermanentWidget(&statusLabel);
 
-    statusCursorLabel.setMaximumWidth(150);
+    statusCursorLabel.setMaximumWidth(180);
     statusCursorLabel.setText("Ln: "+QString::number(0)+"   col:  "+QString::number(1));
     ui->statusbar->addPermanentWidget(&statusCursorLabel);
 
@@ -83,6 +83,8 @@ MainWindow::MainWindow(QWidget *parent)
     //状态栏与工具栏的初始化
     ui->action_State->setChecked(true);
     ui->action_T->setChecked(true);
+    //行号是否显示
+    ui->action_L->setChecked(true);
 
     // 连接"更新状态栏信息"的信号到槽函数
     connect(ui->textEdit, &QPlainTextEdit::textChanged, this, &MainWindow::updateStatusBar);
@@ -387,3 +389,31 @@ void MainWindow::updateStatusBar()
     // 更新状态栏中的文本长度和行数标签
     statusLabel.setText(QString("Length: %1   Lines: %2").arg(textLength).arg(lineCount));
 }
+
+//更新移动光标的实时位置
+void MainWindow::on_textEdit_cursorPositionChanged()
+{
+    int col=0;
+    int In=0;
+    int flg=-1;
+    int pos=ui->textEdit->textCursor().position();
+    QString text=ui->textEdit->toPlainText();
+
+    for(int i=0;i<pos;i++){
+        if(text[i]=='\n'){
+            In++;
+            flg=i;
+        }
+    }
+    flg++;
+    col=pos-flg;
+    statusCursorLabel.setText("Ln: "+QString::number(In+1)+"  Col: "+QString::number(col+1));
+}
+
+
+//显示和隐藏行号
+void MainWindow::on_action_L_triggered(bool checked)
+{
+    ui->textEdit->hideLineNumberArea(checked);
+}
+

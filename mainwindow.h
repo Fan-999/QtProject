@@ -26,6 +26,7 @@ private:
     QFontComboBox * comboFont;
 
     QString filePath;   //记录文件
+
     void iniUI();
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -93,6 +94,11 @@ private slots:
     void on_action_T_triggered();
 
     void updateStatusBar(); //更新状态栏信息
+
+    void on_textEdit_cursorPositionChanged();   //更新移动光标的实时位置
+
+    void on_action_L_triggered(bool checked);
+
 private:
     Ui::MainWindow *ui;
 };
